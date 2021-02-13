@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+// this helps compress files to be cached in the front end/browser
 const compression = require("compression");
 
 const PORT = 3000;
@@ -15,9 +16,11 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// using Mongo as our DB 
 mongoose.connect("mongodb://localhost/budget", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 });
 
 // routes

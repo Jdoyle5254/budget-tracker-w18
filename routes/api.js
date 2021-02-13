@@ -10,7 +10,7 @@ router.post("/api/transaction", ({body}, res) => {
       res.status(404).json(err);
     });
 });
-
+// this is the route we are using for the 'offline' to store locallly
 router.post("/api/transaction/bulk", ({body}, res) => {
   Transaction.insertMany(body)
     .then(dbTransaction => {
