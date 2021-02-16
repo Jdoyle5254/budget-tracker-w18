@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 // this helps compress files to be cached in the front end/browser
 const compression = require("compression");
 
-// const PORT = 3000;
+// updated connection for heroku 
+var PORT = process.env.PORT || 8080;
 
 const app = express();
 
@@ -27,6 +28,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
 // routes
 app.use(require("./routes/api.js"));
 
-app.listen(process.env.port || 3000, () => {
-  console.log(`App running on port now`);
+app.listen(PORT, function() {
+  // Log (server-side) when our server has started
+  console.log("Server listening on: http://localhost:" + PORT);
 });
