@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // this helps compress files to be cached in the front end/browser
 const compression = require("compression");
 
-const PORT = 3000;
+// const PORT = 3000;
 
 const app = express();
 
@@ -27,6 +27,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
 // routes
 app.use(require("./routes/api.js"));
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+app.listen(process.env.port || 3000, () => {
+  console.log(`App running on port now`);
 });
