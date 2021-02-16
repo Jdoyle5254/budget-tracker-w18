@@ -1,6 +1,7 @@
 var CACHE_NAME = "my-site-cache-v1";
 const DATA_CACHE_NAME = "data-cache-v1";
 
+// this sets the urls that are to be cached 
 var urlsToCache = [
   "/",
   "/db.js",
@@ -10,6 +11,11 @@ var urlsToCache = [
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png"
 ];
+  /* this code  does 3 things  
+Open a cache.
+Caches the files.
+Confirm whether all the required assets are cached or not.*/
+
 
 self.addEventListener("install", function(event) {
   // Perform install steps
@@ -21,6 +27,7 @@ self.addEventListener("install", function(event) {
   );
 });
 
+// here the service worker is fetcching the data 
 self.addEventListener("fetch", function(event) {
   // cache all get requests to /api routes
   if (event.request.url.includes("/api/")) {

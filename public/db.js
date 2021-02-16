@@ -6,17 +6,17 @@ const indexedDB =
   window.msIndexedDB ||
   window.shimIndexedDB;
 // creates a variable named
-let db;
+let idb;
 // this creates a variable that opends a table called budget in the indexedDB
 const request = indexedDB.open("budget", 1);
 
 request.onupgradeneeded = ({ target }) => {
-  let db = target.result;
-  db.createObjectStore("pending", { autoIncrement: true });
+  let idb = target.result;
+  idb.createObjectStore("pending", { autoIncrement: true });
 };
 
 request.onsuccess = ({ target }) => {
-  db = target.result;
+  idb = target.result;
 
   // check if app is online before reading from db
   if (navigator.onLine) {
@@ -29,14 +29,14 @@ request.onerror = function(event) {
 };
 
 function saveRecord(record) {
-  const transaction = db.transaction(["pending"], "readwrite");
+  const transaction = idb.transaction(["pending"], "readwrite");
   const store = transaction.objectStore("pending");
 
   store.add(record);
 }
 
 function checkDatabase() {
-  const transaction = db.transaction(["pending"], "readwrite");
+  const transaction = idb.transaction(["pending"], "readwrite");
   const store = transaction.objectStore("pending");
   const getAll = store.getAll();
 
@@ -56,7 +56,7 @@ function checkDatabase() {
       })
       .then(() => {
         // delete records if successful
-        const transaction = db.transaction(["pending"], "readwrite");
+        const transaction = idb.transaction(["pending"], "readwrite");
         const store = transaction.objectStore("pending");
         store.clear();
       });

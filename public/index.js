@@ -1,3 +1,5 @@
+
+// this 'registers" the service worker file for use that file operates independently from the rest of the deployed app 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
